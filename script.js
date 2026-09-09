@@ -4,7 +4,7 @@
 // Swap in your own free key from https://api.nasa.gov before leaving this
 // running long-term — DEMO_KEY is capped at 30 requests/hour, 50/day, shared
 // by everyone using it.
-const API_KEY = ''krkXh9ELpInytug2kH4D3QNwdJ1dkgEYfI0i1njL';
+const API_KEY = 'krkXh9ELpInytug2kH4D3QNwdJ1dkgEYfI0i1njL';
 
 const APOD_URL = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`;
 const REFRESH_MS = 60 * 60 * 1000; // recheck hourly so an always-on kiosk rolls to the new day
