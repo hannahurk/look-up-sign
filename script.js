@@ -9,12 +9,6 @@ const API_KEY = 'krkXh9ELpInytug2kH4D3QNwdJ1dkgEYfI0i1njL';
 const APOD_URL = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`;
 const REFRESH_MS = 60 * 60 * 1000; // recheck hourly so an always-on kiosk rolls to the new day
 
-function truncate(text, maxLen) {
-  if (!text || text.length <= maxLen) return text || '';
-  const cut = text.slice(0, maxLen);
-  return cut.slice(0, cut.lastIndexOf(' ')) + '…';
-}
-
 // ---------- Astronomy Picture of the Day ----------
 
 async function loadAPOD() {
@@ -45,7 +39,7 @@ function renderAPOD(data) {
   oculus.classList.remove('show-video', 'show-video-frame', 'show-fallback');
 
   document.getElementById('apod-title').textContent = data.title;
-  document.getElementById('apod-excerpt').textContent = truncate(data.explanation, 260);
+  document.getElementById('apod-excerpt').textContent = data.explanation;
 
   const imgEl = document.getElementById('oculus-image');
   const videoEl = document.getElementById('oculus-video');
