@@ -27,7 +27,7 @@ body {
 
 .wrap {
   display: grid;
-  grid-template-columns: minmax(320px, 460px) 1fr;
+  grid-template-columns: minmax(360px, 620px) 1fr;
   gap: 48px;
   max-width: 1440px;
   margin: 0 auto;
@@ -119,7 +119,7 @@ body.is-idle .idle-hint {
   font-size: 16px;
   line-height: 1.65;
   color: #c7cbd8;
-  max-width: 42ch;
+  max-width: 100%;
   margin: 0 0 40px;
 }
 
@@ -230,7 +230,7 @@ body.is-idle .idle-hint {
 
 .wx-block {
   width: 100%;
-  max-width: 42ch;
+  max-width: 100%;
   text-align: left;
   border-top: 1px dashed rgba(154, 161, 180, 0.3);
   padding-top: 20px;
