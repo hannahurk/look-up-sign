@@ -162,20 +162,27 @@ body.is-idle .idle-hint {
 }
 
 .oculus-image,
+.oculus-video,
+.oculus-video-frame,
 .oculus-fallback {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  display: block;
+  display: none;
 }
 
-.oculus-image {
+.oculus-image,
+.oculus-video {
   object-fit: cover;
   background: var(--panel);
 }
 
+.oculus-video-frame {
+  border: none;
+  background: var(--panel);
+}
+
 .oculus-fallback {
-  display: none;
   align-items: center;
   justify-content: center;
   background: radial-gradient(circle at 50% 40%, #262a3a 0%, var(--panel) 75%);
@@ -183,7 +190,9 @@ body.is-idle .idle-hint {
   font-size: 56px;
 }
 
-#oculus.show-fallback .oculus-image { display: none; }
+#oculus:not(.show-video):not(.show-video-frame):not(.show-fallback) .oculus-image { display: block; }
+#oculus.show-video .oculus-video { display: block; }
+#oculus.show-video-frame .oculus-video-frame { display: block; }
 #oculus.show-fallback .oculus-fallback { display: flex; }
 
 #oculus.is-loading {

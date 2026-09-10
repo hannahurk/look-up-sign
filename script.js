@@ -31,18 +31,45 @@ async function loadAPOD() {
   }
 }
 
+function youtubeEmbedUrl(url) {
+  const match = (url || '').match(
+    /(?:youtube\.com\/(?:embed\/|watch\?v=)|youtu\.be\/)([\w-]+)/
+  );
+  if (!match) return null;
+  const id = match[1];
+  return `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&modestbranding=1&rel=0`;
+}
+
 function renderAPOD(data) {
   const oculus = document.getElementById('oculus');
+  oculus.classList.remove('show-video', 'show-video-frame', 'show-fallback');
 
   document.getElementById('apod-title').textContent = data.title;
   document.getElementById('apod-excerpt').textContent = truncate(data.explanation, 260);
 
   const imgEl = document.getElementById('oculus-image');
+  const videoEl = document.getElementById('oculus-video');
+  const frameEl = document.getElementById('oculus-video-frame');
+
+  videoEl.pause();
+  videoEl.removeAttribute('src');
+  videoEl.load();
+  frameEl.src = '';
 
   if (data.media_type === 'image') {
     imgEl.src = data.hdurl || data.url;
     imgEl.alt = data.title;
-    oculus.classList.remove('show-fallback');
+  } else if (data.media_type === 'video') {
+    const embedUrl = youtubeEmbedUrl(data.url);
+    if (embedUrl) {
+      frameEl.src = embedUrl;
+      frameEl.title = data.title;
+      oculus.classList.add('show-video-frame');
+    } else {
+      videoEl.src = data.url;
+      videoEl.play().catch(() => {});
+      oculus.classList.add('show-video');
+    }
   } else {
     oculus.classList.add('show-fallback');
   }
